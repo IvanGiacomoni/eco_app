@@ -9,7 +9,7 @@
 
         
           
-                <h5 class="card-title"><b>Chemical Agents</b></h5>
+                <h5 class="card-title"><b>AGENTI CHIMICI</b></h5>
                 <!--  TABELLA  -->
                 <div class="table-responsive table-borderless" style="height:500px">
                     <table class="table">
@@ -17,11 +17,13 @@
                         <!--  INTESTAZIONE TABELLA  -->
                         <thead class="thead-light">
                             <tr>
-                                 <th  scope="col">Station</th>
-                                 <th scope="col">Type</th>
-                                 <th scope="col">Value</th>
-                                <th  scope="col">LAT</th>
-                                <th  scope="col">LNG</th>
+                                 <th  scope="col">STAZIONE</th>
+                                 <th scope="col">TIPO</th>
+                                 <th scope="col">VALORE</th>
+                                 <th  scope="col">MEDIA</th>
+                                 <th  scope="col">SOGLIA</th>
+                                 <th  scope="col">LAT</th>
+                                 <th  scope="col">LNG</th>
                             </tr>
                         </thead>
 
@@ -31,6 +33,8 @@
                                 <td>{{sensor.sensor}}</td>
                                 <td>{{sensor.types}}</td>
                                 <td>{{sensor.value}}</td>
+                                <td>{{sensor.avg}}</td>
+                                <td>{{sensor.th}}</td>
                                 <td>{{sensor.lat}}</td>
                                 <td>{{sensor.lng}}</td>
                             </tr>
@@ -63,7 +67,6 @@ export default {
       sensors : [],
       clickedSensor : {},
       avgs : [],
-
  
     }
   },
@@ -91,14 +94,18 @@ export default {
           }
           if(!this.info.includes(toPush)) this.info.push(toPush)
           if(!this.sensors.includes(response.data[i])){
+
             this.sensors.push({
               sensor : response.data[i].sensor,
               uid : response.data[i].uid,
               lat : response.data[i].lat,
-              lng : response.data[i].long,
+              lng : response.data[i].lng,
               value: response.data[i].value,
-              types: response.data[i].types
+              types: response.data[i].types,
+              avg : (parseFloat(response.data[i].avg)).toFixed(2),
+              th: response.data[i].th
             })
+
           }
         }
       })

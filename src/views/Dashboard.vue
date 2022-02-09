@@ -5,7 +5,7 @@
 
       <div class="container-fluid mt-3 d-none d-xl-block">
     <div class="row  ">
-      <div class="col ml-5">
+      <div class="col-4 ml-5">
         <MeteoReport></MeteoReport>
         </div>
          <div class="col ">
